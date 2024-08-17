@@ -3,7 +3,6 @@ import {ActivatedRoute, RouterLink, RouterOutlet} from '@angular/router';
 import {AuthComponent} from "auth";
 import {NgForOf} from "@angular/common";
 import {InstancesService} from "./services/instances.service";
-import {AnyFederationManifest} from "./models/federation-manifest";
 
 @Component({
   selector: 'app-root',
@@ -24,16 +23,17 @@ export class AppComponent {
     private route: ActivatedRoute,
   ) {
     instancesService.getFederationManifest()
-      .subscribe((manifest: AnyFederationManifest) => {
+      .subscribe((manifest) => {
         this.instances = Object.keys(manifest);
-        this.image = '/assets/bbb.svg';
+        cdr.markForCheck();
+      });
 
-        const name = route.snapshot.data['name'];
-        console.log(1, name, manifest)
-        if (name && (name in manifest)) {
-          this.image = `${manifest[name].replace('/remoteEntry.json', '')}${this.image}`;
-        }
-
+    instancesService.getPath(
+      '/assets/bbb.svg',
+      route.snapshot.data['name'],
+    )
+      .subscribe((image) => {
+        this.image = image;
         cdr.markForCheck();
       });
   }
