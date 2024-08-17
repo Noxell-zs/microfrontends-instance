@@ -9,4 +9,5 @@ export const routes$: Promise<Routes> = fetch(FEDERATION_MANIFEST)
     path: name,
     loadComponent: () =>
       loadRemoteModule(name, './Host').then((m) => m.AppComponent),
+    data: {name},
   })));
