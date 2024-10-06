@@ -3,11 +3,12 @@ import {RouterLink, RouterOutlet} from '@angular/router';
 import {AuthComponent} from "auth";
 import {NgForOf} from "@angular/common";
 import {InstancesService} from "./services/instances.service";
+import { NewsComponent } from "./components/news/news.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, AuthComponent, NgForOf],
+  imports: [RouterOutlet, RouterLink, AuthComponent, NgForOf, NewsComponent],
   providers: [InstancesService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
